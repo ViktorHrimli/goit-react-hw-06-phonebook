@@ -8,7 +8,7 @@ export const Renderlist = () => {
 
   const renderContact = useSelector(state =>
     state.contacts.contact.filter(item =>
-      item.name.toLowerCase().includes(state.contacts.filter)
+      item.name.toLowerCase().includes(state.filterContact.filter)
     )
   );
 

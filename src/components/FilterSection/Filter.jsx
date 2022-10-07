@@ -4,10 +4,9 @@ import { filterContact } from 'redux/actions';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const valueFilter = useSelector(state => state.contacts.filter);
+  const valueFilter = useSelector(state => state.filterContact.filter);
 
   const handlechange = query => {
-    console.log(query.target.value.toLowerCase());
     dispatch(filterContact(query.target.value.toLowerCase()));
   };
 
