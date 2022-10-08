@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
 import 'yup-phone';
-import { Formik, ErrorMessage } from 'formik';
 import Notiflix from 'notiflix';
+import { useDispatch, useSelector } from 'react-redux';
+import { Formik, ErrorMessage } from 'formik';
 import { Box } from 'commonStyle/Common.styled';
 import { FormContact, FormLabel, Input, FormButton, Eror } from './Form.styled';
-import { addContact } from 'redux/contactsSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { addContact, getContact } from 'redux/contactsSlice';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required(),
@@ -16,7 +16,7 @@ const initialValue = { name: '', number: '' };
 
 export const Formes = () => {
   const dispatch = useDispatch();
-  const contact = useSelector(state => state.contacts);
+  const contact = useSelector(getContact);
 
   const hendleSubmit = (values, { resetForm }) => {
     addContacsFormSubmit(values);

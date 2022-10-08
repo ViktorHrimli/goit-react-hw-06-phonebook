@@ -3,19 +3,21 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { UserProvider } from 'components/CastomHook/Provider';
 import { Provider } from 'react-redux';
-import { store } from 'redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, presistor } from 'redux/store';
 import { Phonebook } from 'components/App';
 import { theme } from 'Thema';
 import './index.css';
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={presistor}>
         <UserProvider>
-          <Phonebook />
+          <ThemeProvider theme={theme}>
+            <Phonebook />
+          </ThemeProvider>
         </UserProvider>
-      </Provider>
-    </ThemeProvider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );

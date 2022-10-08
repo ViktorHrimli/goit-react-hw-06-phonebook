@@ -1,15 +1,16 @@
 import { ItemList, ItemListButton, ItemListParagr } from './ListContact.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeContact } from 'redux/contactsSlice';
+import { removeContact, getContact } from 'redux/contactsSlice';
+import { getFilterSelector } from 'redux/filterSlice';
 
 export const Renderlist = () => {
   const dispatch = useDispatch();
   const handleClickRemove = id => dispatch(removeContact(id));
+  const selectorContact = useSelector(getContact);
+  const selectorFilter = useSelector(getFilterSelector);
 
-  const renderContact = useSelector(state =>
-    state.contacts.filter(item =>
-      item.name.toLowerCase().includes(state.filterContact)
-    )
+  const renderContact = selectorContact.filter(item =>
+    item.name.toLowerCase().includes(selectorFilter)
   );
 
   return (
